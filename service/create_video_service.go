@@ -9,6 +9,7 @@ import (
 type CreateVideoService struct {
 	Title string `form:"title" json:"title" binding:"required,min=2,max=30"`
 	Info string `form:"info" json:"info" binding:"required,min=0,max=200"`
+	URL string `form:"url" json:"url"`
 }
 
 // Create 创建视频
@@ -16,6 +17,7 @@ func (service *CreateVideoService) Create() serializer.Response {
 	video:=model.Video{
 		Title:service.Title ,
 		Info: service.Info ,
+		URL: service.URL,
 	}
 	err:=model.DB.Create(&video).Error
 	if err!=nil{
