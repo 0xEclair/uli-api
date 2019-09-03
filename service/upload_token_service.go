@@ -13,7 +13,7 @@ type UploadTokenService struct{
 
 // Post 创建Token
 func (service *UploadTokenService) Post()serializer.Response{
-	client,err:=oss.New(os.Getenv("OSS_END_POINT"),os.Getenv("OSS_ACCESS_KEY_ID"),os.Getenv("OSS_ACCESS_KEY_SERECT"))
+	client,err:=oss.New(os.Getenv("OSS_END_POINT"),os.Getenv("OSS_ACCESS_KEY_ID"),os.Getenv("OSS_ACCESS_KEY_SECRET"))
 	if err!=nil{
 		return serializer.Response{
 			Status: 50002,
