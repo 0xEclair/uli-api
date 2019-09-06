@@ -8,7 +8,7 @@ type Video struct {
 	Title     string `json:"title"`
 	Info      string `json:"info"`
 	URL       string `json:"url"`
-	Avatar	  string `json:"avatar"`
+	Avatar    string `json:"avatar"`
 	CreatedAt int64  `json:"created_at"`
 }
 
