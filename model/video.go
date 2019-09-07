@@ -33,7 +33,7 @@ func (video *Video) View() uint64 {
 }
 
 // AddView 视频浏览
-func (video *Video) AddView(){
+func (video *Video) AddView() {
 	// 增加视频点击数
 	cache.RedisClient.Incr(cache.VideoViewKey(video.ID))
 

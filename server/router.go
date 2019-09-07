@@ -44,6 +44,9 @@ func NewRouter() *gin.Engine {
 		//	v1.DELETE("video/:id",api.DeleteVideo)
 
 		v1.POST("upload/token",api.UploadToken)
+
+		// rank
+		v1.GET("rank/daily",api.DailyRank)
 	}
 	return r
 }

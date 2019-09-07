@@ -20,12 +20,10 @@ func (service *ShowVideoService) Show(id string) serializer.Response {
 			Msg: "视频信息获取失败",
 			Error: err.Error(),
 		}
-		//c.JSON(404,serializer.Response{
-		//	Status:404,
-		//	Msg:"视频信息获取失败",
-		//	Error:err.Error(),
-		//})
 	}
+
+	video.AddView()
+
 	return serializer.Response{
 		Data:   serializer.BuildVideo(video),
 	}
