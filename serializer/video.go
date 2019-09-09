@@ -10,18 +10,22 @@ type Video struct {
 	URL       string `json:"url"`
 	Avatar    string `json:"avatar"`
 	View	  uint64 `json:"view"`
+	User	  User	 `json:"user"`
 	CreatedAt int64  `json:"created_at"`
 }
 
 // BuildVideo 序列化视频
 func BuildVideo(item model.Video) Video {
+	user,_:=model.GetUser(item.UserID)
 	return Video{
 		ID:        item.ID,
 		Title:     item.Title,
 		Info:      item.Info,
 		URL:	   item.URL,
 		Avatar:	   item.AvatarURL(),
+		User:	   BuildUser(user),
 		View:	   item.View(),
+
 		CreatedAt: item.CreatedAt.Unix(),
 	}
 }
