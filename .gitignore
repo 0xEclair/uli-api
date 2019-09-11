@@ -24,6 +24,4 @@ main.exe
 api_server
 push.sh
 docker-compose.yml
-Dockerfile
-Dockerfile222
 fabfile.py
