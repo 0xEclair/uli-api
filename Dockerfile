@@ -2,9 +2,9 @@ FROM golang as build
 
 ENV GOPROXY=https://goproxy.io
 
-ADD . /giligili
+ADD . /uli-api
 
-WORKDIR /giligili
+WORKDIR /uli-api
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o api_server
 
@@ -25,7 +25,7 @@ RUN echo "http://mirrors.aliyun.com/alpine/v3.7/main/" > /etc/apk/repositories &
 
 WORKDIR /www
 
-COPY --from=build /giligili/api_server /usr/bin/api_server
+COPY --from=build /uli-api/api_server /usr/bin/api_server
 ADD ./conf /www/conf
 
 RUN chmod +x /usr/bin/api_server
