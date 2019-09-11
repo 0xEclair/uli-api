@@ -1,6 +1,7 @@
 package model
 
 import (
+	"github.com/gin-gonic/gin"
 	"time"
 
 	"github.com/jinzhu/gorm"
@@ -20,6 +21,11 @@ func Database(connString string) {
 	if err != nil {
 		panic(err)
 	}
+
+	if gin.Mode()=="release"{
+		db.LogMode(false)
+	}
+
 	//设置连接池
 	//空闲
 	db.DB().SetMaxIdleConns(20)
