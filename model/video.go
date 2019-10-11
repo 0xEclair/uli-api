@@ -18,6 +18,14 @@ type Video struct {
 	UserID	uint
 }
 
+// VideoURL 视频地址
+func (video *Video)VideoURL() string{
+	client, _ := oss.New(os.Getenv("OSS_END_POINT"), os.Getenv("OSS_ACCESS_KEY_ID"), os.Getenv("OSS_ACCESS_KEY_SECRET"))
+	bucket, _ := client.Bucket(os.Getenv("OSS_BUCKET"))
+	signedGetURL,_:=bucket.SignURL(video.URL,oss.HTTPGet,600)
+	return signedGetURL
+}
+
 // AvatarURL 封面地址
 func (video *Video) AvatarURL() string{
 	client, _ := oss.New(os.Getenv("OSS_END_POINT"), os.Getenv("OSS_ACCESS_KEY_ID"), os.Getenv("OSS_ACCESS_KEY_SECRET"))
