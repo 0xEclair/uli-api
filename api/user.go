@@ -1,6 +1,7 @@
 package api
 
 import (
+	jwt "github.com/appleboy/gin-jwt"
 	"go-crud/serializer"
 	"go-crud/service"
 
@@ -29,7 +30,7 @@ func UserLogin(c *gin.Context) {
 	if err := c.ShouldBind(&service); err == nil {
 		if user, err := service.Login(); err != nil {
 			c.JSON(200, err)
-		} else {
+		} else {										 // err==nil
 			// 设置Session
 			s := sessions.Default(c)
 			s.Clear()
@@ -41,6 +42,22 @@ func UserLogin(c *gin.Context) {
 		}
 	} else {
 		c.JSON(200, ErrorResponse(err))
+	}
+}
+
+func AppUserLogin(c *gin.Context) (interface{},error){
+	var service service.UserLoginService
+	if err := c.ShouldBind(&service); err == nil {
+		if user, err := service.Login(); err != nil {
+			return nil, jwt.ErrFailedAuthentication
+		} else {										 // err==nil
+
+			//res := serializer.BuildUserResponse(user)
+			//c.JSON(200, res)
+			return user,nil
+		}
+	} else {
+		return "", jwt.ErrMissingLoginValues
 	}
 }
 

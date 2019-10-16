@@ -11,7 +11,7 @@ import (
 // NewRouter 路由配置
 func NewRouter() *gin.Engine {
 	r := gin.Default()
-
+	appmidWare:=middleware.TokenCreate()
 	// 中间件, 顺序不能改
 	r.Use(middleware.Session(os.Getenv("SESSION_SECRET")))
 	r.Use(middleware.Cors())
@@ -40,6 +40,15 @@ func NewRouter() *gin.Engine {
 			authed.PUT("video/:id",api.UpdateVideo)
 			//	v1.DELETE("video/:id",api.DeleteVideo)
 		}
+		// app用户登录
+		v1.POST("app/user/login",appmidWare.LoginHandler)
+		appAuthed:=v1.Group("/app")
+		appAuthed.Use(appmidWare.MiddlewareFunc())
+		{
+			appAuthed.GET("user/me",middleware.HelloHandler)
+		}
+
+
 
 		v1.GET("video/:id",api.ShowVideo)
 		v1.GET("videos",api.ListVideo)
