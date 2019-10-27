@@ -50,10 +50,7 @@ func AppUserLogin(c *gin.Context) (interface{},error){
 	if err := c.ShouldBind(&service); err == nil {
 		if user, err := service.Login(); err != nil {
 			return nil, jwt.ErrFailedAuthentication
-		} else {										 // err==nil
-
-			//res := serializer.BuildUserResponse(user)
-			//c.JSON(200, res)
+		} else {
 			return user,nil
 		}
 	} else {
