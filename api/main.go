@@ -3,12 +3,13 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/appleboy/gin-jwt"
 	"go-crud/conf"
 	"go-crud/model"
 	"go-crud/serializer"
 
 	"github.com/gin-gonic/gin"
-	validator "gopkg.in/go-playground/validator.v8"
+	"gopkg.in/go-playground/validator.v8"
 )
 
 // Ping 状态检查页面
@@ -21,11 +22,28 @@ func Ping(c *gin.Context) {
 
 // CurrentUser 获取当前用户
 func CurrentUser(c *gin.Context) *model.User {
+
 	if user, _ := c.Get("user"); user != nil {
 		if u, ok := user.(*model.User); ok {
 			return u
 		}
 	}
+
+	// token分析
+	claims:=jwt.ExtractClaims(c)
+	tmp:=(claims["id"])
+	if tmp!=nil{
+		// interface{} 不能直接转成int64
+		uid,ok:=tmp.(float64)
+		if ok {
+			// float64传进去会找不到数据
+			user,err:=model.GetUser(int64(uid))
+			if err==nil{
+				return &user
+			}
+		}
+	}
+
 	return nil
 }
 

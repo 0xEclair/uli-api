@@ -45,7 +45,7 @@ func NewRouter() *gin.Engine {
 		appAuthed:=v1.Group("/app")
 		appAuthed.Use(appmidWare.MiddlewareFunc())
 		{
-			appAuthed.GET("user/me",middleware.HelloHandler)
+			appAuthed.GET("user/me",api.UserMe)
 		}
 
 
