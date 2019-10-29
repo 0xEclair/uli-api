@@ -42,6 +42,8 @@ func NewRouter() *gin.Engine {
 		}
 		// app用户登录
 		v1.POST("app/user/login",appmidWare.LoginHandler)
+		// refresh接口 不会验证token是否完整
+		//v1.POST("app/user/refresh",appmidWare.RefreshHandler)
 		appAuthed:=v1.Group("/app")
 		appAuthed.Use(appmidWare.MiddlewareFunc())
 		{
