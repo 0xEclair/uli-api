@@ -20,6 +20,15 @@ func Ping(c *gin.Context) {
 	})
 }
 
+func AppPing(c *gin.Context){
+	c.JSON(200,serializer.Response{
+		Status: 0,
+		Data:   nil,
+		Msg:    "pong",
+		Error:  "",
+	})
+}
+
 // CurrentUser 获取当前用户
 func CurrentUser(c *gin.Context) *model.User {
 

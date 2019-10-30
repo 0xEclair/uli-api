@@ -48,6 +48,7 @@ func NewRouter() *gin.Engine {
 		appAuthed.Use(appmidWare.MiddlewareFunc())
 		{
 			appAuthed.GET("user/me",api.UserMe)
+			appAuthed.GET("user/ping",api.AppPing)
 		}
 
 
