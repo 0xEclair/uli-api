@@ -36,7 +36,7 @@ func (service *UploadTokenService) Post()serializer.Response{
 		oss.ContentType("image/png"),
 	}
 
-	key:="tea/"+uuid.Must(uuid.NewRandom()).String()+".png"
+	key:="upload/"+uuid.Must(uuid.NewRandom()).String()+".png"
 
 	// 签名直传
 	signedPutURL,err:=bucket.SignURL(key,oss.HTTPPut,600,options...)
