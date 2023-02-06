@@ -16,7 +16,7 @@ require (
 	github.com/joho/godotenv v1.3.0
 	github.com/robfig/cron v1.2.0
 	github.com/satori/go.uuid v1.2.0 // indirect
-	github.com/tidwall/gjson v1.3.2 // indirect
+	github.com/tidwall/gjson v1.9.3 // indirect
 	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4
 	gopkg.in/dgrijalva/jwt-go.v3 v3.2.0 // indirect
 	gopkg.in/go-playground/validator.v8 v8.18.2
